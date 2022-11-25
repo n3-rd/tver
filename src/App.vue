@@ -6,10 +6,10 @@ import SideBar from "./components/SideBar.vue";
 <template>
   <div>
     <div class="flex justify-between">
-      <div class="sidebar-section w-[20%] h-screen bg-neutral">
+      <div class="sidebar-section w-[20%] h-screen bg-neutral fixed">
         <SideBar />
       </div>
-      <div class="main-section w-[90%]">
+      <div class="main-section w-[80%] ml-[20%]">
         <RouterView />
       </div>
     </div>

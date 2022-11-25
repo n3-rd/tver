@@ -8,7 +8,7 @@ const getRandomShowId = () => {
 };
 </script>
 <template>
-  <div class="sidebar flex items-center justify-center w-full">
+  <div class="sidebar flex items-center justify-center w-[20%] fixed">
     <div class="sidebar-inner flex flex-col items-center py-11 gap-6 w-[80%]">
       <SearchComponent />
 

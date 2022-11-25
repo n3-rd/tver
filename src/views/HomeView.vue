@@ -1,15 +1,18 @@
 <script>
 import ShowTitle from "../components/ShowTitle.vue";
 import ShowImage from "../components/ShowImage.vue";
+import CastSection from "../components/CastSection.vue";
 
 export default {
   components: {
     ShowTitle,
     ShowImage,
+    CastSection,
   },
   data() {
     return {
       show: [],
+      cast: [],
     };
   },
   methods: {
@@ -28,11 +31,21 @@ export default {
     refreshShow() {
       localStorage.getItem("showId");
     },
+    fetchCast() {
+      fetch(
+        `https://api.tvmaze.com/shows/${localStorage.getItem("showId")}/cast`
+      )
+        .then((response) => response.json())
+        .then((cast) => {
+          this.cast = cast;
+        });
+    },
   },
   mounted() {
     this.populateLocalShowId();
     this.refreshShow();
     this.fetchShow();
+    this.fetchCast();
     setInterval(() => {
       this.refreshShow();
       this.fetchShow();
@@ -42,8 +55,8 @@ export default {
 </script>
 
 <template>
-  <main>
-    <div class="w-full flex h-screen items-center px-6">
+  <main class="px-6">
+    <div class="w-full flex h-screen items-center">
       <div class="show-title w-[50%]">
         <ShowTitle
           :title="show.name"
@@ -59,6 +72,9 @@ export default {
       <div class="show-image w-[50%] flex justify-center" v-if="show.image">
         <ShowImage class="show-image-inner" :imageSrc="show.image.original" />
       </div>
+    </div>
+    <div class="cast">
+      <CastSection :cast="cast" />
     </div>
   </main>
 </template>
